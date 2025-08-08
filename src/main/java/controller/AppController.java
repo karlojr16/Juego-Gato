@@ -21,10 +21,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import model.Partida;
 
-// Controlador de la pantalla principal
 public class AppController {
     
-    // Elementos de la interfaz
     @FXML
     private Label welcomeText;
 
