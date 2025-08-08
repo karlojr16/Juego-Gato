@@ -4,7 +4,6 @@ import model.Partida;
 import repository.PartidaRepository;
 import java.util.List;
 
-// Servicio para la gestión de partidas (lógica de negocio)
 public class PartidaService {
     private final PartidaRepository partidaRepository;
 

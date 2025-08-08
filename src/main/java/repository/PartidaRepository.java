@@ -7,7 +7,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-// Repositorio para manejar la persistencia de partidas en SQLite
 public class PartidaRepository {
     private static final String DB_URL = "jdbc:sqlite:tic_tac_toe.db";
 

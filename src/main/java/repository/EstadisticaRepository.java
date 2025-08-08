@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-// Repositorio para manejar la persistencia de estadísticas de jugadores en SQLite
 public class EstadisticaRepository {
     private static final String DB_URL = "jdbc:sqlite:tic_tac_toe.db";
 
@@ -75,7 +74,6 @@ public class EstadisticaRepository {
             System.err.println("Error al obtener estadística: " + e.getMessage());
             e.printStackTrace();
         }
-        // Si no existe, crear una nueva estadística
         return new EstadisticaJugador(nombreJugador);
     }
 

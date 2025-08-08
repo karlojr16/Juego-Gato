@@ -13,18 +13,15 @@ import java.util.List;
 
 public class RankingController {
     
-    // Elementos de la interfaz
     @FXML private Button btnCerrar;
     @FXML private Button btnActualizar;
     @FXML private Button btnVolver;
     @FXML private Label lblEstadisticasGlobales;
     
-    // Tablas de ranking
     @FXML private TableView<EstadisticaJugador> tablaVictorias;
     @FXML private TableView<EstadisticaJugador> tablaPorcentaje;
     @FXML private TableView<EstadisticaJugador> tablaRachas;
     
-    // Columnas tabla victorias
     @FXML private TableColumn<EstadisticaJugador, String> colPosicionVictorias;
     @FXML private TableColumn<EstadisticaJugador, String> colNombreVictorias;
     @FXML private TableColumn<EstadisticaJugador, Integer> colVictorias;
@@ -33,7 +30,6 @@ public class RankingController {
     @FXML private TableColumn<EstadisticaJugador, Integer> colRachaVictorias;
     @FXML private TableColumn<EstadisticaJugador, Integer> colMejorRachaVictorias;
     
-    // Columnas tabla porcentaje
     @FXML private TableColumn<EstadisticaJugador, String> colPosicionPorcentaje;
     @FXML private TableColumn<EstadisticaJugador, String> colNombrePorcentaje;
     @FXML private TableColumn<EstadisticaJugador, String> colPorcentajePorcentaje;
@@ -42,7 +38,6 @@ public class RankingController {
     @FXML private TableColumn<EstadisticaJugador, Integer> colDerrotas;
     @FXML private TableColumn<EstadisticaJugador, Integer> colEmpatesPorcentaje;
     
-    // Columnas tabla rachas
     @FXML private TableColumn<EstadisticaJugador, String> colPosicionRachas;
     @FXML private TableColumn<EstadisticaJugador, String> colNombreRachas;
     @FXML private TableColumn<EstadisticaJugador, Integer> colMejorRachaRachas;
@@ -66,7 +61,6 @@ public class RankingController {
     }
     
     private void configurarTablas() {
-        // Configurar tabla de victorias
         colPosicionVictorias.setCellValueFactory(param -> 
             new javafx.beans.property.SimpleStringProperty(String.valueOf(tablaVictorias.getItems().indexOf(param.getValue()) + 1)));
         colNombreVictorias.setCellValueFactory(new PropertyValueFactory<>("nombreJugador"));
@@ -77,7 +71,6 @@ public class RankingController {
         colRachaVictorias.setCellValueFactory(new PropertyValueFactory<>("rachaActual"));
         colMejorRachaVictorias.setCellValueFactory(new PropertyValueFactory<>("mejorRacha"));
         
-        // Configurar tabla de porcentaje
         colPosicionPorcentaje.setCellValueFactory(param -> 
             new javafx.beans.property.SimpleStringProperty(String.valueOf(tablaPorcentaje.getItems().indexOf(param.getValue()) + 1)));
         colNombrePorcentaje.setCellValueFactory(new PropertyValueFactory<>("nombreJugador"));
@@ -88,7 +81,6 @@ public class RankingController {
         colDerrotas.setCellValueFactory(new PropertyValueFactory<>("partidasPerdidas"));
         colEmpatesPorcentaje.setCellValueFactory(new PropertyValueFactory<>("empates"));
         
-        // Configurar tabla de rachas
         colPosicionRachas.setCellValueFactory(param -> 
             new javafx.beans.property.SimpleStringProperty(String.valueOf(tablaRachas.getItems().indexOf(param.getValue()) + 1)));
         colNombreRachas.setCellValueFactory(new PropertyValueFactory<>("nombreJugador"));
@@ -108,21 +100,17 @@ public class RankingController {
     
     private void cargarDatos() {
         try {
-            // Cargar estadísticas globales
             String estadisticasGlobales = estadisticaService.obtenerEstadisticasGlobales();
             lblEstadisticasGlobales.setText(estadisticasGlobales);
             
-            // Cargar ranking por victorias
             List<EstadisticaJugador> rankingVictorias = estadisticaService.obtenerRankingPorVictorias();
             ObservableList<EstadisticaJugador> datosVictorias = FXCollections.observableArrayList(rankingVictorias);
             tablaVictorias.setItems(datosVictorias);
             
-            // Cargar ranking por porcentaje
             List<EstadisticaJugador> rankingPorcentaje = estadisticaService.obtenerRankingPorPorcentaje();
             ObservableList<EstadisticaJugador> datosPorcentaje = FXCollections.observableArrayList(rankingPorcentaje);
             tablaPorcentaje.setItems(datosPorcentaje);
             
-            // Cargar ranking por rachas
             List<EstadisticaJugador> rankingRachas = estadisticaService.obtenerRankingPorRacha();
             ObservableList<EstadisticaJugador> datosRachas = FXCollections.observableArrayList(rankingRachas);
             tablaRachas.setItems(datosRachas);
@@ -133,7 +121,6 @@ public class RankingController {
             System.err.println("Error al cargar datos de ranking: " + e.getMessage());
             e.printStackTrace();
             
-            // Mostrar mensaje de error al usuario
             lblEstadisticasGlobales.setText("Error al cargar estadísticas. Intenta actualizar.");
         }
     }

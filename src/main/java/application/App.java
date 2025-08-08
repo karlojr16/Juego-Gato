@@ -13,10 +13,8 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("app.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 500, 400);
-        //stage.setTitle("Hello!");
         stage.setScene(scene);
 
-        //centrado en mi pantalla
         stage.centerOnScreen();
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
@@ -25,7 +23,6 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-
         launch();
     }
 }

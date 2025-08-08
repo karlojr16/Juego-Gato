@@ -1,15 +1,12 @@
 package model;
 
-// Clase para representar un jugador del juego
 public class Jugador
 {
-    // Atributos del jugador
-    private String nombre;        // Nombre del jugador
-    private int victorias;        // Número de victorias
-    private String simbolo;       // Símbolo que usa (X u O)
-    private boolean esComputadora; // Si es computadora o humano
+    private String nombre;
+    private int victorias;
+    private String simbolo;
+    private boolean esComputadora;
 
-    // Constructor por defecto
     public Jugador()
     {
         this.nombre = "Jugador 1";
@@ -18,7 +15,6 @@ public class Jugador
         this.esComputadora = false;
     }
 
-    // Constructor con nombre y victorias
     public Jugador(String nombre, int victorias)
     {
         this.nombre = nombre;
@@ -27,7 +23,6 @@ public class Jugador
         this.esComputadora = false;
     }
 
-    // Constructor completo
     public Jugador(String nombre, int victorias, String simbolo, boolean esComputadora)
     {
         this.nombre = nombre;
@@ -35,8 +30,6 @@ public class Jugador
         this.simbolo = simbolo;
         this.esComputadora = esComputadora;
     }
-
-    // Métodos para obtener y establecer valores (getters y setters)
     
     public String getNombre() {
         return nombre;
@@ -70,12 +63,10 @@ public class Jugador
         this.esComputadora = esComputadora;
     }
 
-    // Método para aumentar victorias
     public void ganarPartida() {
         this.victorias++;
     }
     
-    // Método para compatibilidad con código existente
     public int getWins() {
         return victorias;
     }

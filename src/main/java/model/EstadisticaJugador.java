@@ -2,7 +2,6 @@ package model;
 
 import java.time.LocalDate;
 
-// POJO para representar las estadísticas de un jugador
 public class EstadisticaJugador {
     private int id;
     private String nombreJugador;
@@ -29,7 +28,6 @@ public class EstadisticaJugador {
         this.ultimaPartida = LocalDate.now();
     }
 
-    // Método para calcular el porcentaje de victorias
     public void calcularPorcentajeVictorias() {
         if (partidasJugadas > 0) {
             this.porcentajeVictorias = (double) partidasGanadas / partidasJugadas * 100;
@@ -38,14 +36,13 @@ public class EstadisticaJugador {
         }
     }
 
-    // Método para actualizar estadísticas después de una partida
     public void actualizarEstadisticas(boolean gano, boolean empate) {
         partidasJugadas++;
         ultimaPartida = LocalDate.now();
         
         if (empate) {
             empates++;
-            rachaActual = 0; // Empate rompe la racha
+            rachaActual = 0;
         } else if (gano) {
             partidasGanadas++;
             rachaActual++;
@@ -54,13 +51,12 @@ public class EstadisticaJugador {
             }
         } else {
             partidasPerdidas++;
-            rachaActual = 0; // Derrota rompe la racha
+            rachaActual = 0;
         }
         
         calcularPorcentajeVictorias();
     }
 
-    // Getters y Setters
     public int getId() {
         return id;
     }

@@ -3,9 +3,8 @@ package model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-// POJO para representar una partida de Tic Tac Toe
 public class Partida {
-    private int id; // Opcional, autoincremental en la base de datos
+    private int id;
     private LocalDate fecha;
     private LocalTime hora;
     private String nombreJugadorX;
@@ -13,7 +12,7 @@ public class Partida {
     private int marcadorX;
     private int marcadorO;
     private int empates;
-    private String estadoJson; // Estado completo de la partida en JSON
+    private String estadoJson;
 
     public Partida() {}
 

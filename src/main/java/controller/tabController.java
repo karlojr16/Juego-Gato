@@ -33,18 +33,14 @@ import java.time.LocalTime;
 import org.json.JSONObject;
 import service.EstadisticaService;
 
-// Controlador de la pantalla del tablero
 public class tabController {
 
-    // Objetos del modelo
     private Tablero tablero;
     private Jugador jugador1;
     private Jugador jugador2;
     
-    // Matriz de botones del tablero
     private Button[][] botonesTablero;
 
-    // Elementos de la interfaz
     @FXML
     private ResourceBundle resources;
 
@@ -95,47 +91,39 @@ public class tabController {
     private int empates = 0;
     private AppController appController;
 
-    // Método para cerrar la aplicación
     @FXML
     void click(MouseEvent event) {
         Platform.exit();
         System.exit(0);
     }
 
-    // Método para cambiar color cuando el mouse entra
     @FXML
     void enter(MouseEvent event) {
         lblCierre.setStyle("-fx-text-fill: red;");
     }
 
-    // Método para cambiar color cuando el mouse sale
     @FXML
     void exited(MouseEvent event) {
         lblCierre.setStyle("-fx-text-fill: white;");
     }
 
-    // Método para iniciar un juego nuevo
     @FXML
     void juegoNuevo(javafx.event.ActionEvent event) {
         reiniciarJuego();
     }
 
-    // Método para volver a la pantalla principal
     @FXML
     void volver(javafx.event.ActionEvent event) {
         preguntarGuardarYSalir(() -> cerrarYVolver(event));
     }
 
     private void cerrarYVolver(javafx.event.ActionEvent event) {
-        // Cerrar ventana actual
         final Node node = (Node) event.getSource();
         final Stage stage = (Stage) node.getScene().getWindow();
         stage.close();
-        // Cargar la pantalla principal
         cargarPantallaPrincipal();
     }
 
-    // Método para cargar la pantalla principal
     private void cargarPantallaPrincipal() {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("app.fxml"));
         try {
@@ -153,18 +141,14 @@ public class tabController {
         }
     }
 
-    // Método que se ejecuta al inicializar la pantalla
     @FXML
     void initialize() {
-        // Crear la matriz de botones
         botonesTablero = new Button[3][3];
         
-        // Configurar el grid del tablero
         gridTablero.setHgap(10);
         gridTablero.setVgap(10);
         gridTablero.setAlignment(Pos.CENTER);
 
-        // Crear los botones del tablero
         crearBotonesTablero();
 
         if (menuReiniciar != null) {
@@ -178,7 +162,6 @@ public class tabController {
         }
     }
 
-    // Método para crear los botones del tablero
     private void crearBotonesTablero() {
         for (int fila = 0; fila < 3; fila++) {
             for (int columna = 0; columna < 3; columna++) {
@@ -190,14 +173,12 @@ public class tabController {
                 final int f = fila;
                 final int c = columna;
                 
-                // Configurar el evento del botón
                 boton.setOnAction(actionEvent -> {
                     if (boton.getText().isEmpty() && !tablero.juegoTerminado()) {
                         hacerMovimiento(f, c, boton);
                     }
                 });
                 
-                // Efecto hover para los botones
                 boton.setOnMouseEntered(e -> {
                     if (boton.getText().isEmpty()) {
                         boton.setStyle("-fx-background-color: rgba(255,255,255,0.3); -fx-text-fill: white; -fx-border-color: rgba(255,255,255,1); -fx-border-width: 2; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 2);");
@@ -216,13 +197,10 @@ public class tabController {
         }
     }
 
-    // Método para hacer un movimiento
     private void hacerMovimiento(int fila, int columna, Button boton) {
         if (tablero.hacerMovimiento(fila, columna)) {
-            // Poner el símbolo en el botón
             boton.setText(tablero.getJugadorActual().getSimbolo());
             
-            // Cambiar el estilo del botón cuando se hace un movimiento
             String simbolo = tablero.getJugadorActual().getSimbolo();
             if (simbolo.equals("X")) {
                 boton.setStyle("-fx-background-color: rgba(255,107,107,0.3); -fx-text-fill: #ff6b6b; -fx-border-color: #ff6b6b; -fx-border-width: 2; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(255,107,107,0.4), 5, 0, 0, 2); -fx-font-weight: bold;");
@@ -230,33 +208,27 @@ public class tabController {
                 boton.setStyle("-fx-background-color: rgba(102,126,234,0.3); -fx-text-fill: #667eea; -fx-border-color: #667eea; -fx-border-width: 2; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(102,126,234,0.4), 5, 0, 0, 2); -fx-font-weight: bold;");
             }
             
-            // Verificar si hay ganador
             String ganador = tablero.verificarGanador();
             if (ganador != null) {
                 manejarVictoria(ganador);
                 return;
             }
             
-            // Verificar empate
             if (tablero.esEmpate()) {
                 manejarEmpate();
                 return;
             }
             
-            // Cambiar turno
             tablero.cambiarTurno();
             actualizarTurno();
             
-            // Si el siguiente jugador es computadora, hacer su movimiento
             if (tablero.getJugadorActual().isEsComputadora()) {
                 hacerMovimientoComputadora();
             }
         }
     }
 
-    // Método para que la computadora haga su movimiento
     private void hacerMovimientoComputadora() {
-        // Lógica simple: buscar la primera casilla vacía
         for (int fila = 0; fila < 3; fila++) {
             for (int columna = 0; columna < 3; columna++) {
                 if (botonesTablero[fila][columna].getText().isEmpty()) {
@@ -267,13 +239,11 @@ public class tabController {
         }
     }
 
-    // Método para manejar cuando hay un ganador
     private void manejarVictoria(String simboloGanador) {
         Jugador ganador = tablero.obtenerJugadorPorSimbolo(simboloGanador);
         ganador.incrementarVictoria();
         actualizarPuntajes();
         
-        // Actualizar estadísticas en la base de datos
         estadisticaService.actualizarEstadisticasPartida(
             jugador1.getNombre(), 
             jugador2.getNombre(), 
@@ -285,14 +255,12 @@ public class tabController {
         mostrarDialogoResultado("¡" + ganador.getNombre() + " ha ganado!", true);
     }
 
-    // Método para manejar cuando hay empate
     private void manejarEmpate() {
         empates++;
         if (appController != null) {
             appController.setEmpates(empates);
         }
         
-        // Actualizar estadísticas en la base de datos (empate)
         estadisticaService.actualizarEstadisticasPartida(
             jugador1.getNombre(), 
             jugador2.getNombre(), 
@@ -304,7 +272,6 @@ public class tabController {
         mostrarDialogoResultado("El juego ha terminado en empate.", false);
     }
 
-    // Método para mostrar el diálogo personalizado de resultado
     private void mostrarDialogoResultado(String mensaje, boolean hayGanador) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/resultado-dialogo.fxml"));
@@ -330,7 +297,6 @@ public class tabController {
         }
     }
 
-    // Preguntar si se desea guardar la partida antes de reiniciar
     private void preguntarGuardarYReiniciar() {
         if (!partidaGuardada) {
             mostrarDialogoConfirmacion("¿Deseas guardar la partida antes de continuar?", () -> {
@@ -342,7 +308,6 @@ public class tabController {
         }
     }
 
-    // Método para deshabilitar el tablero
     private void deshabilitarTablero() {
         for (int fila = 0; fila < 3; fila++) {
             for (int columna = 0; columna < 3; columna++) {
@@ -351,7 +316,6 @@ public class tabController {
         }
     }
 
-    // Método para habilitar el tablero
     private void habilitarTablero() {
         for (int fila = 0; fila < 3; fila++) {
             for (int columna = 0; columna < 3; columna++) {
@@ -360,12 +324,10 @@ public class tabController {
         }
     }
 
-    // Método para actualizar el turno
     private void actualizarTurno() {
         Jugador jugadorActual = tablero.getJugadorActual();
         lblturno.setText("Turno: " + jugadorActual.getNombre());
         
-        // Cambiar imagen del jugador en turno
         try {
             if (jugadorActual == jugador1) {
                 imgJugador1.setImage(new Image(getClass().getResourceAsStream("/images/JugadorAuxillar.png")));
@@ -379,55 +341,42 @@ public class tabController {
         }
     }
 
-    // Método para actualizar los puntajes
     private void actualizarPuntajes() {
         lblpuntajejugadoruno.setText(String.valueOf(jugador1.getWins()));
         lblpuntajejugadordos.setText(String.valueOf(jugador2.getWins()));
     }
 
-    // Método para reiniciar el juego
     private void reiniciarJuego() {
-        // Limpiar el tablero y restaurar estilos
         for (int fila = 0; fila < 3; fila++) {
             for (int columna = 0; columna < 3; columna++) {
                 botonesTablero[fila][columna].setText("");
-                // Restaurar el estilo original de los botones
                 botonesTablero[fila][columna].setStyle("-fx-background-color: rgba(255,255,255,0.15); -fx-text-fill: white; -fx-border-color: rgba(255,255,255,0.8); -fx-border-width: 2; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 1);");
             }
         }
         
-        // Reiniciar la lógica del tablero
         tablero.reiniciarJuego();
         
-        // Habilitar el tablero
         habilitarTablero();
         
-        // Actualizar el turno
         actualizarTurno();
     }
 
-    // Método para inicializar el juego con los jugadores
     void inicio(Jugador jugador1, Jugador jugador2) {
         this.jugador1 = jugador1;
         this.jugador2 = jugador2;
         this.tablero = new Tablero(jugador1, jugador2);
         this.empates = 0;
         
-        // Configurar los nombres
         lblnombrejugadoruno.setText(jugador1.getNombre());
         lblnombrejugadordos.setText(jugador2.getNombre());
         
-        // Configurar los puntajes
         actualizarPuntajes();
         
-        // Configurar las imágenes iniciales
         configurarImagenesIniciales();
         
-        // Actualizar el turno inicial
         actualizarTurno();
     }
 
-    // Método para configurar las imágenes iniciales
     private void configurarImagenesIniciales() {
         try {
             if (jugador1.getSimbolo().equals("X")) {
@@ -442,7 +391,6 @@ public class tabController {
         }
     }
 
-    // Método para restaurar el estado del tablero y turno desde un JSON
     public void restaurarEstadoDesdeJson(String estadoJson) {
         try {
             JSONObject obj = new JSONObject(estadoJson);
@@ -501,7 +449,7 @@ public class tabController {
             controller.setOnMenu(() -> {
                 if (onCancelar != null) onCancelar.run();
             });
-            controller.setOnSalir(() -> {}); // No hace nada
+            controller.setOnSalir(() -> {});
             Stage dialogStage = new Stage();
             dialogStage.initModality(Modality.APPLICATION_MODAL);
             dialogStage.initOwner(gridTablero.getScene().getWindow());
@@ -536,7 +484,6 @@ public class tabController {
     }
 
     private String serializarEstadoPartida() {
-        // Serialización simple a JSON (puedes usar una librería como Gson para mejor formato)
         StringBuilder sb = new StringBuilder();
         sb.append("{");
         sb.append("\"tablero\":[");
