@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RankingController" prefWidth="700.0" prefHeight="500.0" style="-fx-background-color: linear-gradient(to bottom right, #4facfe 0%, #00f2fe 100%);">
+   <children>
+      <Label layoutX="200.0" layoutY="20.0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;" text="🏆 RANKING Y ESTADÍSTICAS">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnCerrar" layoutX="650.0" layoutY="20.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: rgba(255,255,255,0.2); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 15;" text="✕" />
+      <VBox layoutX="20.0" layoutY="70.0" prefWidth="300.0" spacing="5.0">
+         <children>
+            <Label fx:id="lblEstadisticasGlobales" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-background-color: rgba(255,255,255,0.1); -fx-background-radius: 8; -fx-padding: 10;" text="Cargando estadísticas..." />
+         </children>
+      </VBox>
+      <TabPane layoutX="20.0" layoutY="150.0" prefHeight="300.0" prefWidth="660.0" style="-fx-background-color: rgba(255,255,255,0.1); -fx-background-radius: 10;">
+        <tabs>
+          <Tab closable="false" text="🥇 Por Victorias">
+               <content>
+                  <VBox spacing="5.0" style="-fx-padding: 10;">
+                     <children>
+                        <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Ranking por número total de victorias:" />
+                        <TableView fx:id="tablaVictorias" prefHeight="230.0">
+                          <columns>
+                            <TableColumn fx:id="colPosicionVictorias" prefWidth="40.0" text="Pos" />
+                            <TableColumn fx:id="colNombreVictorias" prefWidth="150.0" text="Jugador" />
+                              <TableColumn fx:id="colVictorias" prefWidth="80.0" text="Victorias" />
+                              <TableColumn fx:id="colPartidasVictorias" prefWidth="80.0" text="Partidas" />
+                              <TableColumn fx:id="colPorcentajeVictorias" prefWidth="90.0" text="Porcentaje" />
+                              <TableColumn fx:id="colRachaVictorias" prefWidth="90.0" text="Racha Actual" />
+                              <TableColumn fx:id="colMejorRachaVictorias" prefWidth="100.0" text="Mejor Racha" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+          <Tab closable="false" text="📊 Por Porcentaje">
+               <content>
+                  <VBox spacing="5.0" style="-fx-padding: 10;">
+                     <children>
+                        <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Ranking por porcentaje de victorias (mínimo 3 partidas):" />
+                        <TableView fx:id="tablaPorcentaje" prefHeight="230.0">
+                          <columns>
+                            <TableColumn fx:id="colPosicionPorcentaje" prefWidth="40.0" text="Pos" />
+                            <TableColumn fx:id="colNombrePorcentaje" prefWidth="150.0" text="Jugador" />
+                              <TableColumn fx:id="colPorcentajePorcentaje" prefWidth="90.0" text="Porcentaje" />
+                              <TableColumn fx:id="colVictoriasPorcentaje" prefWidth="80.0" text="Victorias" />
+                              <TableColumn fx:id="colPartidasPorcentaje" prefWidth="80.0" text="Partidas" />
+                              <TableColumn fx:id="colDerrotas" prefWidth="80.0" text="Derrotas" />
+                              <TableColumn fx:id="colEmpatesPorcentaje" prefWidth="80.0" text="Empates" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+            <Tab closable="false" text="🔥 Por Rachas">
+               <content>
+                  <VBox spacing="5.0" style="-fx-padding: 10;">
+                     <children>
+                        <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Ranking por mejor racha de victorias consecutivas:" />
+                        <TableView fx:id="tablaRachas" prefHeight="230.0">
+                          <columns>
+                            <TableColumn fx:id="colPosicionRachas" prefWidth="40.0" text="Pos" />
+                            <TableColumn fx:id="colNombreRachas" prefWidth="150.0" text="Jugador" />
+                              <TableColumn fx:id="colMejorRachaRachas" prefWidth="100.0" text="Mejor Racha" />
+                              <TableColumn fx:id="colRachaActualRachas" prefWidth="100.0" text="Racha Actual" />
+                              <TableColumn fx:id="colVictoriasRachas" prefWidth="80.0" text="Victorias" />
+                              <TableColumn fx:id="colPartidasRachas" prefWidth="80.0" text="Partidas" />
+                              <TableColumn fx:id="colUltimaPartida" prefWidth="120.0" text="Última Partida" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <HBox layoutX="250.0" layoutY="460.0" spacing="20.0">
+         <children>
+            <Button fx:id="btnActualizar" style="-fx-background-color: linear-gradient(to right, #667eea 0%, #764ba2 100%); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="🔄 Actualizar" />
+            <Button fx:id="btnVolver" style="-fx-background-color: linear-gradient(to right, #ff6b6b 0%, #ee5a24 100%); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="🏠 Volver" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

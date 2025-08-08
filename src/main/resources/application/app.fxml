@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane fx:id="panelFondo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: linear-gradient(to bottom right, #4facfe 0%, #00f2fe 100%);" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AppController">
+   <Label fx:id="lblCierre" layoutX="470.0" layoutY="10.0" onMouseClicked="#click" onMouseEntered="#enter" onMouseExited="#exited" text="X" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-background-color: rgba(255,255,255,0.2); -fx-background-radius: 15;">
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Label>
+   
+   <Label alignment="CENTER" layoutY="30.0" prefHeight="30.0" prefWidth="500.0" text="🎮 JUEGO DEL GATO 🎮" textAlignment="CENTER" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 0, 1);">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </Label>
+   
+   <!-- Controles de modo de juego -->
+   <Label layoutX="50.0" layoutY="80.0" text="Modo de Juego:" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 2, 0, 0, 1);">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </Label>
+   
+   <RadioButton fx:id="rbHumano" layoutX="50.0" layoutY="110.0" selected="true" text="👥 Contra Humano" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 1, 0, 0, 1);" onAction="#cambiarModoJuego" />
+   <RadioButton fx:id="rbComputadora" layoutX="200.0" layoutY="110.0" text="🤖 Contra Computadora" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 1, 0, 0, 1);" onAction="#cambiarModoJuego" />
+   
+   <!-- Campos de jugadores -->
+   <Label layoutX="50.0" layoutY="150.0" text="Jugador 1:" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 2, 0, 0, 1);">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </Label>
+   <TextField fx:id="txtJugador1" alignment="CENTER" focusTraversable="false" layoutX="50.0" layoutY="175.0" prefHeight="35.0" prefWidth="200.0" promptText="Nombre del Jugador 1" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e0e0e0; -fx-border-width: 1; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 0, 1);" text="Jugador 1" />
+   
+   <Label fx:id="lblJugador2" layoutX="50.0" layoutY="220.0" text="Jugador 2:" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 2, 0, 0, 1);">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </Label>
+   <TextField fx:id="txtJugador2" alignment="CENTER" focusTraversable="false" layoutX="50.0" layoutY="245.0" prefHeight="35.0" prefWidth="200.0" promptText="Nombre del Jugador 2" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e0e0e0; -fx-border-width: 1; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 0, 1);" text="Jugador 2" />
+   
+   <!-- Selección de símbolo -->
+   <Label layoutX="300.0" layoutY="150.0" text="Selecciona tu símbolo:" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 2, 0, 0, 1);">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </Label>
+   
+   <ImageView fx:id="imgCirculo" fitHeight="50.0" fitWidth="50.0" layoutX="300.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#seleccionarCirculo" style="-fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 1);">
+      <Image url="@../images/JugadorCirculo.png" />
+   </ImageView>
+   
+   <ImageView fx:id="imgEquis" fitHeight="50.0" fitWidth="50.0" layoutX="370.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#seleccionarEquis" style="-fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 1);">
+      <Image url="@../images/JugadorEquis.png" />
+   </ImageView>
+   
+   <Label fx:id="lblSimboloSeleccionado" layoutX="300.0" layoutY="235.0" text="Símbolo: O" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-background-color: rgba(255,255,255,0.2); -fx-background-radius: 5; -fx-padding: 5;">
+      <font>
+         <Font size="12.0" />
+      </font>
+   </Label>
+   
+   <!-- Botón iniciar -->
+   <Button fx:id="btnIniciar" layoutX="150.0" layoutY="320.0" maxHeight="50.0" maxWidth="160.0" mnemonicParsing="false" onAction="#iniciar" style="-fx-background-color: linear-gradient(to right, #667eea 0%, #764ba2 100%); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-border-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 2);" text="🚀 Iniciar Juego" />
+   
+   <!-- Botón ranking -->
+   <Button fx:id="btnRanking" layoutX="320.0" layoutY="320.0" maxHeight="50.0" maxWidth="160.0" mnemonicParsing="false" onAction="#abrirRanking" style="-fx-background-color: linear-gradient(to right, #ffa726 0%, #ff9800 100%); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-border-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 2);" text="🏆 Ver Ranking" />
+   
+   <Label fx:id="lblEmpates" layoutX="200.0" layoutY="380.0" text="Empates: 0" style="-fx-font-size: 16px; -fx-text-fill: #333;" />
+</Pane>
