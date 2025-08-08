@@ -153,7 +153,7 @@ Al ejecutar las pruebas, deberías ver:
 
 ## Autor
 
-Desarrollado por [karlojr16](https://github.com/karlojr16).
+Desarrollado por [Octavio Chong](https://github.com/FakeMoradin2) y [Karlo Ontiveros](https://github.com/karlojr16).
 
 ---
 
